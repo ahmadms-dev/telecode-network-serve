@@ -11,7 +11,7 @@ class NetworkServe extends ServeCommand
      *
      * @var string
      */
-    protected $signature = 'serve:local';
+    protected $signature = 'serve:local {--port=8000}';
 
     /**
      * The console command description.
@@ -28,21 +28,27 @@ class NetworkServe extends ServeCommand
     protected function getHostAndPort()
     {
 
+        // get port from argument or default value
+        $port = $this->getOptions()['port'] ?? 8000;
         $t = [];
         exec('ipconfig', $t);
         $index = array_search('Wireless LAN adapter Wi-Fi:', $t);
-        $t = array_slice($t, $index, 4);
-        $ip = trim(explode(":", $t[3])[1]);
+        $t = array_slice($t, $index, count($t));
+        $value = collect($t)->filter(function ($item) {
+            return strpos($item, 'IPv4 Address') !== false;
+        })->first();
+        if (!$value) {
+            $this->error('No IP address found');
+            exit;
+        }
+
+        $ip = trim(explode(":", $value)[1]);
         return [
             $ip,
-            $this->port(),
+            $port,
         ];
     }
 
-    protected function port()
-    {
-        return 8000;
-    }
 
     public function option($key = null)
     {
