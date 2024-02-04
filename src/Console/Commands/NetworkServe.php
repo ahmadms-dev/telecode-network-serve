@@ -11,7 +11,7 @@ class NetworkServe extends ServeCommand
      *
      * @var string
      */
-    protected $signature = 'serve:local {--port=8000}';
+    protected $name = 'serve:local';
 
     /**
      * The console command description.

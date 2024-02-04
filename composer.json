@@ -10,7 +10,10 @@
             "Telecode\\NetworkServe\\": "src/"
         }
     },
-    "authors": [
+  "license": [
+        "MIT"
+  ],
+  "authors": [
         {
             "name": "ahmad almsalam",
             "email": "ahmad.ms996@gmail.com"
