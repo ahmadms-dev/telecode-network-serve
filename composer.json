@@ -3,7 +3,7 @@
     "description": "run your laravel app over local wifi network",
     "type": "library",
     "require": {
-        "illuminate/support": "^10.0"
+        "illuminate/support": "*"
     },
     "autoload": {
         "psr-4": {
